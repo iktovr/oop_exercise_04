@@ -115,4 +115,42 @@ typename std::enable_if<std::is_same<T, Rectangle<typename T::type>>::value, typ
 }
 
 int main() {
+	int ix = 0, iy = 0, ia = 0, ib = 0;
+	double dx = 0, dy = 0, da = 0, db = 0;
+
+	try {
+		std::cout << "Triangle(int): ";
+		std::cin >> ix >> iy >> ia;
+		Triangle<int> tr1(ix, iy, ia);
+		ix = iy = ia = 0;
+		std::cout << "Square(int): ";
+		std::cin >> ix >> iy >> ia;
+		Square<int> sq1(ix, iy, ia);
+		ix = iy = ia = 0;
+		std::cout << "Rectangle(int): ";
+		std::cin >> ix >> iy >> ia >> ib;
+		Rectangle<int> rect1(ix, iy, ia, ib);
+		std::cout << "Square(double): ";
+		std::cin >> dx >> dy >> da;
+		Square<double> sq2(dx, dy, da);
+		dx = dy = da = 0;
+		std::cout << "Rectangle(double): ";
+		std::cin >> dx >> dy >> da >> db;
+		Rectangle<double> rect2(dx, dy, da, db);
+		dx = dy = da = db = 0;
+		std::cout << "Triangle(double): ";
+		std::cin >> dx >> dy >> da;
+		Triangle<double> tr2(dx, dy, da);
+
+		std::tuple<Triangle<int>,Square<int>,Rectangle<int>,
+			Square<double>,Rectangle<double>,Triangle<double>>
+			tup{tr1, sq1, rect1, sq2, rect2, tr2};
+	
+		std::cout << "Coordinates:" << std::endl;
+		print(tup);
+		double ts = square(tup);
+		std::cout << "Total square: " << ts << std::endl;
+	} catch (std::invalid_argument& ex) {
+		std::cout << ex.what() << std::endl;
+	}
 }
