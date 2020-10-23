@@ -59,16 +59,16 @@ typename std::enable_if<is_tuple<T>::value, void>::type print(T &tup) {
 		print(std::get<index>(tup));
 		print<T, index+1>(tup);
 	} else {
-		std::cout << std::endl;
+		return;
 	}
 }
 
 template <class T>
 typename std::enable_if<std::is_same<T, Triangle<typename T::type>>::value, void>::type print(T &tr) {
-	std::cout << "(" << sq.x.first << ", " << sq.x.second << ") " <<
-				"(" << 1.0 / 2 * sq.x.first - sqrt(3) / 2 * sq.x.second << ", " << 
-				sqrt(3) / 2 * sq.x.second - 1.0 / 2 * sq.x.first << ") " <<
-				"(" << sq.x.first + sq.a << ", " << sq.x.second << ")" << std::endl;
+	std::cout << "(" << tr.x.first << ", " << tr.x.second << ") " <<
+				"(" << tr.x.first + 1.0 / 2 * tr.a << ", " << 
+				tr.x.second + sqrt(3) / 2 * tr.a << ") " <<
+				"(" << tr.x.first + tr.a << ", " << tr.x.second << ")" << std::endl;
 
 }
 
